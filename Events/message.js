@@ -6,6 +6,7 @@ class Message {
 
   async run(message) {
     const client = this.client;
+    const Embeds = new (require('../Utils/Embeds'))(client);
 
     if (message.author.bot || message.system) return;
 
@@ -18,7 +19,10 @@ class Message {
       .slice(client.config.Commands.Prefix.length)
       .trim()
       .split(/ +/g);
-    const command = client.commands.get(args.shift().toLowerCase());
+    let cmd = args.shift().toLowerCase();
+
+    let command = client.commands.get(cmd);
+    if (!command) command = client.commands.get(client.aliases.get(cmd));
 
     if (!command || command == null) return;
 
@@ -40,7 +44,20 @@ class Message {
         client.cooldowns.set(message.author.id, false);
       }, client.config.Commands.Cooldown);
     } else {
-      console.log("you're being affected by cooldown rn :)");
+      message.delete();
+
+      message.channel
+        .send(
+          await Embeds.error({
+            title: `Cooldown! | @${message.member.displayName}`,
+            description: 'You are currently under cooldown, try again soon!',
+          })
+        )
+        .then((m) =>
+          m.delete({
+            timeout: client.config.Commands.Cooldown / 2,
+          })
+        );
     }
   }
 }

@@ -15,7 +15,7 @@ class Ping extends Command {
   }
 
   async run(client, message, args) {
-    message.reply('hi');
+    message.reply(`Pong! 🏓 ${client.ws.ping}ms`);
   }
 }
 

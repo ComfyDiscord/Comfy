@@ -17,4 +17,9 @@ module.exports = {
     BotMaster: '334392742266535957',
     Cooldown: 10000,
   },
+
+  Colors: {
+    Neutral: '#344343',
+    Error: '#c43343',
+  },
 };
