@@ -19,6 +19,20 @@ class Embeds {
       .setFooter(`ComfyBot`);
   }
 
+  async success(
+    options = {
+      title: 'No title was given :(',
+      description: 'No description was given :(',
+    }
+  ) {
+    return new MessageEmbed()
+      .setColor(this.client.config.Colors.Success)
+      .setTitle(options.title)
+      .setDescription(options.description)
+      .setTimestamp()
+      .setFooter(`ComfyBot`);
+  }
+
   async error(
     options = {
       title: 'An error occurred',

@@ -55,6 +55,8 @@ class Comfy extends Discord.Client {
 
         if (!event.enable)
           return this.logger.warning(`${eventName} event is disabled.`);
+
+        this.logger.success(`${eventName} event loaded!`);
         if (event.enable) super.on(eventName, (...args) => event.run(...args));
       }
     });

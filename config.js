@@ -21,5 +21,6 @@ module.exports = {
   Colors: {
     Neutral: '#344343',
     Error: '#c43343',
+    Success: '#0faf3a',
   },
 };
